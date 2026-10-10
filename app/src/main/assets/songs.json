@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Amazing Grace",
+    "artist": "John Newton",
+    "originalKey": "G",
+    "category": "Hymn",
+    "content": "[Verse 1]\nG             C         G\nAmazing grace how sweet the sound\n               D\nThat saved a wretch like me\n   G          C          G\nI once was lost, but now I'm found\n     Em       D      G\nWas blind, but now I see\n\n[Verse 2]\n       G            C        G\n'Twas grace that taught my heart to fear\n               D\nAnd grace my fears relieved\n     G            C       G\nHow precious did that grace appear\n     Em      D       G\nThe hour I first believed"
+  },
+  {
+    "title": "10,000 Reasons (Bless The Lord)",
+    "artist": "Matt Redman",
+    "originalKey": "G",
+    "category": "Worship",
+    "content": "[Chorus]\n         C           G\nBless the Lord, O my soul\n D/F#     Em\nO my soul\nC            G      Dsus4  D\nWorship His holy name\n          C        Em\nSing like never before\nC   D   Em\nO my soul\n     C             D       G\nI'll worship Your holy name\n\n[Verse 1]\n    C         G           D        Em\nThe sun comes up, it's a new day dawning\nC            G          D     Em\nIt's time to sing Your song again\n     C          G             D             Em\nWhatever may pass and whatever lies before me\nC2           G             Dsus4  D    G\nLet me be singing when the evening comes"
+  },
+  {
+    "title": "What A Beautiful Name",
+    "artist": "Hillsong Worship",
+    "originalKey": "D",
+    "category": "Worship",
+    "content": "[Verse 1]\nD\nYou were the Word at the beginning\nG         Bm           A\nOne with God the Lord Most High\nBm            A/C#        D\nYour hidden glory in creation\nG            Bm             A\nNow revealed in You our Christ\n\n[Chorus 1]\n                    D\nWhat a beautiful Name it is\n                    A\nWhat a beautiful Name it is\n     Bm            A         G\nThe Name of Jesus Christ my King\n                    D/F#\nWhat a beautiful Name it is\n               A\nNothing compares to this\n                    Bm\nWhat a beautiful Name it is\n     A         G\nThe Name of Jesus"
+  },
+  {
+    "title": "Way Maker",
+    "artist": "Sinach / Leeland",
+    "originalKey": "G",
+    "category": "Praise",
+    "content": "[Verse 1]\n              G\nYou are here, moving in our midst\n            D\nI worship You, I worship You\n              Em\nYou are here, working in this place\n            C\nI worship You, I worship You\n\n[Chorus]\n            G\nWay Maker, Miracle Worker\n                  D\nPromise Keeper, Light in the darkness\nEm                        C\nMy God, that is who You are"
+  },
+  {
+    "title": "Good Good Father",
+    "artist": "Chris Tomlin",
+    "originalKey": "A",
+    "category": "Worship",
+    "content": "[Verse 1]\nA\nI've heard a thousand stories\n   A\nOf what they think You're like\n    A\nBut I've heard the tender whisper\n   D            A\nOf love in the dead of night\n         D       A/C#\nYou tell me that You're pleased\n        Bm7        E\nAnd that I'm never alone\n\n[Chorus]\n                 D2\nYou're a good, good Father\n                A\nIt's who You are, it's who You are\n     Bm7         E\nIt's who You are\n                D2\nAnd I'm loved by You\n                A\nIt's who I am, it's who I am\n     Bm7        E\nIt's who I am"
+  }
+]

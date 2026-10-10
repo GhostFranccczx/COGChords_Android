@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_songs"
+        android:icon="@drawable/ic_songs"
+        android:title="Songs" />
+    <item
+        android:id="@+id/nav_lineups"
+        android:icon="@drawable/ic_lineup"
+        android:title="Lineups" />
+    <item
+        android:id="@+id/nav_chords"
+        android:icon="@drawable/ic_chord_ref"
+        android:title="Chords" />
+</menu>

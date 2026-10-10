@@ -1,0 +1,131 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- 1. Dark Stage Theme (great for gigs and late-night practice) -->
+    <style name="Theme.COGChords.DarkStage" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/dark_stage_bg</item>
+        <item name="colorSurface">@color/dark_stage_surface</item>
+        <item name="colorSurfaceVariant">@color/dark_stage_badge_bg</item>
+        <item name="colorPrimary">@color/dark_stage_accent</item>
+        <item name="colorOnPrimary">@color/dark_stage_bg</item>
+        <item name="colorSecondary">@color/dark_stage_secondary</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorOnSurface">@color/dark_stage_text</item>
+        <item name="colorOnSurfaceVariant">@color/dark_stage_text_secondary</item>
+        <item name="colorOutline">@color/dark_stage_divider</item>
+        <item name="android:textColor">@color/dark_stage_text</item>
+        <item name="android:textColorPrimary">@color/dark_stage_text</item>
+        <item name="android:textColorSecondary">@color/dark_stage_text_secondary</item>
+        <item name="android:textColorHint">@color/dark_stage_text_muted</item>
+        <item name="android:editTextColor">@color/dark_stage_text</item>
+        <item name="colorOnBackground">@color/dark_stage_text</item>
+
+        <!-- Custom Chord & Secondary Accent -->
+        <item name="colorChordText">@color/dark_stage_accent</item>
+        <item name="colorAccentSecondary">@color/dark_stage_secondary</item>
+
+        <!-- Window bar styling -->
+        <item name="android:statusBarColor">@color/dark_stage_bg</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/dark_stage_surface</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+
+    <!-- 2. Clean Paper Theme (feels like a songbook) -->
+    <style name="Theme.COGChords.CleanPaper" parent="Theme.Material3.Light.NoActionBar">
+        <item name="android:windowBackground">@color/clean_paper_bg</item>
+        <item name="colorSurface">@color/clean_paper_surface</item>
+        <item name="colorSurfaceVariant">@color/clean_paper_badge_bg</item>
+        <item name="colorPrimary">@color/clean_paper_accent</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/clean_paper_secondary</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorOnSurface">@color/clean_paper_text</item>
+        <item name="colorOnSurfaceVariant">@color/clean_paper_text_secondary</item>
+        <item name="colorOutline">@color/clean_paper_divider</item>
+        <item name="android:textColor">@color/clean_paper_text</item>
+        <item name="android:textColorPrimary">@color/clean_paper_text</item>
+        <item name="android:textColorSecondary">@color/clean_paper_text_secondary</item>
+        <item name="android:textColorHint">@color/clean_paper_text_muted</item>
+        <item name="android:editTextColor">@color/clean_paper_text</item>
+        <item name="colorOnBackground">@color/clean_paper_text</item>
+
+        <!-- Custom Chord & Secondary Accent -->
+        <item name="colorChordText">@color/clean_paper_accent</item>
+        <item name="colorAccentSecondary">@color/clean_paper_secondary</item>
+
+        <!-- Window bar styling -->
+        <item name="android:statusBarColor">@color/clean_paper_bg</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/clean_paper_surface</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <!-- 3. Vibrant and Playful Theme (good for beginners or kids) -->
+    <style name="Theme.COGChords.Vibrant" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/vibrant_bg</item>
+        <item name="colorSurface">@color/vibrant_surface</item>
+        <item name="colorSurfaceVariant">@color/vibrant_badge_bg</item>
+        <item name="colorPrimary">@color/vibrant_accent_pink</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/vibrant_accent_mint</item>
+        <item name="colorOnSecondary">@color/vibrant_bg</item>
+        <item name="colorOnSurface">@color/vibrant_text</item>
+        <item name="colorOnSurfaceVariant">@color/vibrant_text_secondary</item>
+        <item name="colorOutline">@color/vibrant_divider</item>
+        <item name="android:textColor">@color/vibrant_text</item>
+        <item name="android:textColorPrimary">@color/vibrant_text</item>
+        <item name="android:textColorSecondary">@color/vibrant_text_secondary</item>
+        <item name="android:textColorHint">@color/vibrant_text_muted</item>
+        <item name="android:editTextColor">@color/vibrant_text</item>
+        <item name="colorOnBackground">@color/vibrant_text</item>
+
+        <!-- Custom Chord & Secondary Accent -->
+        <item name="colorChordText">@color/vibrant_accent_yellow</item>
+        <item name="colorAccentSecondary">@color/vibrant_accent_mint</item>
+
+        <!-- Window bar styling -->
+        <item name="android:statusBarColor">@color/vibrant_bg</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/vibrant_surface</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+
+    <!-- 4. Rainbow Spectrum Theme (full rainbow color spectrum: ROYGBIV) -->
+    <style name="Theme.COGChords.Rainbow" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/rainbow_bg</item>
+        <item name="colorSurface">@color/rainbow_surface</item>
+        <item name="colorSurfaceVariant">@color/rainbow_badge_bg</item>
+        <item name="colorPrimary">@color/rainbow_pink</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/rainbow_cyan</item>
+        <item name="colorOnSecondary">@color/rainbow_bg</item>
+        <item name="colorOnSurface">@color/rainbow_text</item>
+        <item name="colorOnSurfaceVariant">@color/rainbow_text_secondary</item>
+        <item name="colorOutline">@color/rainbow_divider</item>
+        <item name="android:textColor">@color/rainbow_text</item>
+        <item name="android:textColorPrimary">@color/rainbow_text</item>
+        <item name="android:textColorSecondary">@color/rainbow_text_secondary</item>
+        <item name="android:textColorHint">@color/rainbow_text_muted</item>
+        <item name="android:editTextColor">@color/rainbow_text</item>
+        <item name="colorOnBackground">@color/rainbow_text</item>
+
+        <!-- Custom Chord & Secondary Accent -->
+        <item name="colorChordText">@color/rainbow_yellow</item>
+        <item name="colorAccentSecondary">@color/rainbow_green</item>
+
+        <!-- Window bar styling -->
+        <item name="android:statusBarColor">@color/rainbow_bg</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/rainbow_surface</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+
+    <!-- Default Theme is Dark Stage -->
+    <style name="Theme.COGChords" parent="Theme.COGChords.DarkStage" />
+
+    <!-- Circular Shape Appearance for Logo and Emblems -->
+    <style name="ShapeAppearance.COGChords.Circle" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+</resources>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base Utilities -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- 1. Dark Stage Theme Colors -->
+    <!-- (great for gigs and late-night practice) -->
+    <color name="dark_stage_bg">#FF12141A</color>
+    <color name="dark_stage_surface">#FF1C1F28</color>
+    <color name="dark_stage_chord_text">#FFF5F1E8</color>
+    <color name="dark_stage_accent">#FFFFB547</color>
+    <color name="dark_stage_secondary">#FF5B8DEF</color>
+    <color name="dark_stage_text">#FFF5F1E8</color>
+    <color name="dark_stage_text_secondary">#FF9EA3B0</color>
+    <color name="dark_stage_text_muted">#FF6C7280</color>
+    <color name="dark_stage_divider">#FF2A2F3D</color>
+    <color name="dark_stage_badge_bg">#FF252A36</color>
+
+    <!-- 2. Clean Paper Theme Colors -->
+    <!-- (feels like a songbook) -->
+    <color name="clean_paper_bg">#FFFAF7F2</color>
+    <color name="clean_paper_surface">#FFFFFFFF</color>
+    <color name="clean_paper_chord_text">#FFD9482B</color>
+    <color name="clean_paper_accent">#FFD9482B</color>
+    <color name="clean_paper_secondary">#FF2F6F73</color>
+    <color name="clean_paper_text">#FF1F1F1F</color>
+    <color name="clean_paper_text_secondary">#FF555555</color>
+    <color name="clean_paper_text_muted">#FF777777</color>
+    <color name="clean_paper_divider">#FFDDD6CB</color>
+    <color name="clean_paper_badge_bg">#FFF0EAE1</color>
+
+    <!-- 3. Vibrant and Playful Theme Colors -->
+    <!-- (good for beginners or kids) -->
+    <color name="vibrant_bg">#FF1B1033</color>
+    <color name="vibrant_surface">#FF2A1B4D</color>
+    <color name="vibrant_text">#FFFFFFFF</color>
+    <color name="vibrant_chord_text">#FFFFD23F</color>
+    <color name="vibrant_accent_pink">#FFFF4F8B</color>
+    <color name="vibrant_accent_mint">#FF2EE6C5</color>
+    <color name="vibrant_accent_yellow">#FFFFD23F</color>
+    <color name="vibrant_text_secondary">#FFB8A9D9</color>
+    <color name="vibrant_text_muted">#FF7E6E9E</color>
+    <color name="vibrant_divider">#FF3D2968</color>
+    <color name="vibrant_badge_bg">#FF392463</color>
+
+    <!-- 4. Rainbow Spectrum Theme Colors -->
+    <!-- Full rainbow spectrum: Red, Orange, Yellow, Green, Blue, Indigo, Violet -->
+    <color name="rainbow_bg">#FF0F111E</color>              <!-- Deep cosmic night background -->
+    <color name="rainbow_surface">#FF181B2E</color>         <!-- Deep dark indigo-tinted surface -->
+    <color name="rainbow_badge_bg">#FF232742</color>        <!-- Slightly lighter card/chip container -->
+    <color name="rainbow_divider">#FF31365A</color>         <!-- Indigo-muted border/divider -->
+    <color name="rainbow_text">#FFFFFFFF</color>            <!-- Crisp white for maximum legibility -->
+    <color name="rainbow_text_secondary">#FFC4CBDF</color>  <!-- Soft lavender-blue for secondary text -->
+    <color name="rainbow_text_muted">#FF7B84A6</color>      <!-- Muted slate for hints/placeholders -->
+
+    <!-- Rainbow Spectrum Accents (ROYGBIV) -->
+    <color name="rainbow_red">#FFFF3366</color>             <!-- Radiant Neon Red/Rose -->
+    <color name="rainbow_orange">#FFFF7700</color>          <!-- Vivid Tangerine Orange -->
+    <color name="rainbow_yellow">#FFFFD600</color>          <!-- Electric Sun Yellow -->
+    <color name="rainbow_green">#FF00E676</color>           <!-- Hyper Emerald Green -->
+    <color name="rainbow_cyan">#FF00E5FF</color>            <!-- Electric Cyan / Turquoise -->
+    <color name="rainbow_blue">#FF2979FF</color>            <!-- Vivid Royal Blue -->
+    <color name="rainbow_indigo">#FF7C4DFF</color>          <!-- Deep Cosmic Indigo -->
+    <color name="rainbow_violet">#FFE040FB</color>          <!-- Neon Orchid Violet -->
+    <color name="rainbow_pink">#FFFF4081</color>            <!-- Bright Flamingo Pink -->
+
+    <!-- Rainbow translucent chip backgrounds for ultra colorful cards -->
+    <color name="rainbow_chip_red">#33FF3366</color>
+    <color name="rainbow_chip_orange">#33FF7700</color>
+    <color name="rainbow_chip_yellow">#33FFD600</color>
+    <color name="rainbow_chip_green">#3300E676</color>
+    <color name="rainbow_chip_cyan">#3300E5FF</color>
+    <color name="rainbow_chip_blue">#332979FF</color>
+    <color name="rainbow_chip_indigo">#337C4DFF</color>
+    <color name="rainbow_chip_violet">#33E040FB</color>
+
+    <!-- Fallback / Base Semantic tokens -->
+    <color name="text_primary">@color/dark_stage_text</color>
+    <color name="text_secondary">@color/dark_stage_text_secondary</color>
+    <color name="text_muted">@color/dark_stage_text_muted</color>
+    <color name="badge_background">@color/dark_stage_badge_bg</color>
+    <color name="badge_text">@color/dark_stage_text</color>
+    <color name="divider_color">@color/dark_stage_divider</color>
+    <color name="mono_dark_card">@color/dark_stage_surface</color>
+    <color name="mono_light_card">@color/clean_paper_surface</color>
+</resources>

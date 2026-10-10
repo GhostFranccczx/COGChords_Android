@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/bg_card_mono"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <!-- Order Position -->
+    <TextView
+        android:id="@+id/tv_song_position"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:background="@drawable/bg_key_badge"
+        android:fontFamily="monospace"
+        android:gravity="center"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:text="1" />
+
+    <!-- Song Info -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_song_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="Amazing Grace" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_song_key"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                tools:text="Key: G" />
+
+            <TextView
+                android:id="@+id/tv_song_artist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="11sp"
+                tools:text="• John Newton" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Controls: Move Up, Move Down, Delete -->
+    <ImageView
+        android:id="@+id/btn_move_up"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Move Up"
+        android:padding="6dp"
+        android:src="@drawable/ic_arrow_up"
+        app:tint="?attr/colorOnSurface" />
+
+    <ImageView
+        android:id="@+id/btn_move_down"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="2dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Move Down"
+        android:padding="6dp"
+        android:src="@drawable/ic_arrow_down"
+        app:tint="?attr/colorOnSurface" />
+
+    <ImageView
+        android:id="@+id/btn_remove_song"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginStart="4dp"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Remove Song"
+        android:padding="6dp"
+        android:src="@drawable/ic_close"
+        app:tint="?attr/colorOnSurfaceVariant" />
+
+</LinearLayout>
