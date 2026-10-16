@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cogchords.R;
 import com.example.cogchords.data.model.ChordModel;
 import com.example.cogchords.util.ChordDictionary;
+import com.example.cogchords.util.PianoChord;
+import com.google.android.material.button.MaterialButtonToggleGroup;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 
@@ -30,6 +33,12 @@ public class ChordReferenceFragment extends Fragment {
     private View layoutEmptyChords;
     private EditText etSearchChords;
     private ChipGroup chipGroupRootNotes;
+    private MaterialButtonToggleGroup toggleInstrument;
+    private TextView tvHeaderSubtitle;
+
+    // Remembered while the app is open, since this tab is rebuilt every time it is selected
+    private static boolean lastPianoMode = false;
+    private boolean pianoMode = lastPianoMode;
 
     private String selectedRoot = "ALL";
     private String currentQuery = "";
@@ -56,6 +65,8 @@ public class ChordReferenceFragment extends Fragment {
         layoutEmptyChords = view.findViewById(R.id.layout_empty_chords);
         etSearchChords = view.findViewById(R.id.et_search_chords);
         chipGroupRootNotes = view.findViewById(R.id.chip_group_root_notes);
+        toggleInstrument = view.findViewById(R.id.toggle_instrument);
+        tvHeaderSubtitle = view.findViewById(R.id.tv_header_subtitle);
 
         View ivHeaderLogo = view.findViewById(R.id.iv_header_logo);
         if (ivHeaderLogo != null) {
@@ -75,6 +86,7 @@ public class ChordReferenceFragment extends Fragment {
 
         setupRecyclerView();
         setupFilters();
+        setupInstrumentToggle();
         applyFilter();
     }
 
@@ -123,11 +135,31 @@ public class ChordReferenceFragment extends Fragment {
         }
     }
 
-    private void applyFilter() {
-        List<ChordModel> results = ChordDictionary.filterChords(selectedRoot, currentQuery);
-        adapter.setChords(results);
+    private void setupInstrumentToggle() {
+        toggleInstrument.check(pianoMode ? R.id.btn_mode_piano : R.id.btn_mode_guitar);
+        toggleInstrument.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
+            if (!isChecked) return;
+            pianoMode = checkedId == R.id.btn_mode_piano;
+            lastPianoMode = pianoMode;
+            applyFilter();
+        });
+    }
 
-        if (results.isEmpty()) {
+    private void applyFilter() {
+        boolean noResults;
+        if (pianoMode) {
+            List<PianoChord> pianoResults = PianoChord.filter(selectedRoot, currentQuery);
+            adapter.setPianoChords(pianoResults);
+            noResults = pianoResults.isEmpty();
+            tvHeaderSubtitle.setText("Piano Keyboard Reference");
+        } else {
+            List<ChordModel> results = ChordDictionary.filterChords(selectedRoot, currentQuery);
+            adapter.setChords(results);
+            noResults = results.isEmpty();
+            tvHeaderSubtitle.setText("Guitar Fretboard Reference");
+        }
+
+        if (noResults) {
             layoutEmptyChords.setVisibility(View.VISIBLE);
             rvChordReference.setVisibility(View.GONE);
         } else {

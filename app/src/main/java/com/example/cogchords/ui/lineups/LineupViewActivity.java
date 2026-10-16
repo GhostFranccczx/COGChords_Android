@@ -37,7 +37,7 @@ public class LineupViewActivity extends AppCompatActivity implements LineupSongV
     protected void onCreate(Bundle savedInstanceState) {
         com.example.cogchords.util.ThemeManager.applyTheme(this);
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        com.example.cogchords.util.ThemeManager.enableEdgeToEdge(this);
         setContentView(R.layout.activity_lineup_view);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

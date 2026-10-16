@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         ThemeManager.applyTheme(this);
         currentTheme = ThemeManager.getTheme(this);
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        com.example.cogchords.util.ThemeManager.enableEdgeToEdge(this);
         setContentView(R.layout.activity_main);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

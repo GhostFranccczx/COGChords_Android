@@ -52,6 +52,9 @@ dependencies {
     implementation libs.room.runtime
     annotationProcessor libs.room.compiler
 
+    // PDF text extraction (used by "Import from PDF / Word")
+    implementation 'com.tom-roush:pdfbox-android:2.0.27.0'
+
     // Lifecycle ViewModel & LiveData
     implementation libs.lifecycle.viewmodel
     implementation libs.lifecycle.livedata

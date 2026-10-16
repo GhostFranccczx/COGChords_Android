@@ -40,6 +40,14 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp" />
 
+    <!-- Piano Keyboard Diagram (shown instead of the fretboard in Piano mode) -->
+    <com.example.cogchords.ui.chords.PianoDiagramView
+        android:id="@+id/piano_diagram_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:visibility="gone" />
+
     <!-- Frets String Formula -->
     <TextView
         android:id="@+id/tv_chord_frets"

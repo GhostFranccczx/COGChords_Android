@@ -28,7 +28,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         ThemeManager.applyTheme(this);
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        com.example.cogchords.util.ThemeManager.enableEdgeToEdge(this);
         setContentView(R.layout.activity_settings);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {

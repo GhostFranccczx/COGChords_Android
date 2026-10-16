@@ -6,22 +6,43 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.cogchords.data.dao.LineupDao;
+import com.example.cogchords.data.dao.SongAnnotationDao;
 import com.example.cogchords.data.dao.SongDao;
 import com.example.cogchords.data.entity.Lineup;
 import com.example.cogchords.data.entity.LineupSong;
 import com.example.cogchords.data.entity.Song;
+import com.example.cogchords.data.entity.SongAnnotation;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Song.class, Lineup.class, LineupSong.class}, version = 2, exportSchema = false)
+@Database(entities = {Song.class, Lineup.class, LineupSong.class, SongAnnotation.class}, version = 3, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     public abstract SongDao songDao();
     public abstract LineupDao lineupDao();
+    public abstract SongAnnotationDao songAnnotationDao();
+
+    /**
+     * Version 2 -> 3: adds the table that stores doodles drawn over songs.
+     * A real migration is required here: without it Room would fall back to
+     * fallbackToDestructiveMigration() below and delete all songs and lineups on update.
+     */
+    static final Migration MIGRATION_2_3 = new Migration(2, 3) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase db) {
+            db.execSQL("CREATE TABLE IF NOT EXISTS `song_annotations` ("
+                    + "`songId` INTEGER NOT NULL, "
+                    + "`strokesData` TEXT NOT NULL, "
+                    + "`updatedAt` INTEGER NOT NULL, "
+                    + "PRIMARY KEY(`songId`), "
+                    + "FOREIGN KEY(`songId`) REFERENCES `songs`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+        }
+    };
 
     private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
@@ -37,6 +58,7 @@ public abstract class AppDatabase extends RoomDatabase {
                             AppDatabase.class,
                             "cog_chords_database"
                     )
+                    .addMigrations(MIGRATION_2_3)
                     .fallbackToDestructiveMigration()
                     .addCallback(new RoomDatabase.Callback() {
                         @Override

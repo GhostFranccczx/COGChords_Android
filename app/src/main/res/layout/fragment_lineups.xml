@@ -32,7 +32,7 @@
                 android:foreground="?android:attr/selectableItemBackgroundBorderless"
                 android:scaleType="centerCrop"
                 android:src="@drawable/app_logo"
-                app:shapeAppearanceOverlay="@style/ShapeAppearance.COGChords.Circle"
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.COGChords.RoundedSquare"
                 app:strokeColor="?attr/colorOutline"
                 app:strokeWidth="1.5dp" />
 

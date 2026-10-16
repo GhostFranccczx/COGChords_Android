@@ -24,9 +24,9 @@
     <color name="clean_paper_chord_text">#FFD9482B</color>
     <color name="clean_paper_accent">#FFD9482B</color>
     <color name="clean_paper_secondary">#FF2F6F73</color>
-    <color name="clean_paper_text">#FF1F1F1F</color>
-    <color name="clean_paper_text_secondary">#FF555555</color>
-    <color name="clean_paper_text_muted">#FF777777</color>
+    <color name="clean_paper_text">#FF2B2420</color>
+    <color name="clean_paper_text_secondary">#FF5C4F45</color>
+    <color name="clean_paper_text_muted">#FF6F6359</color>
     <color name="clean_paper_divider">#FFDDD6CB</color>
     <color name="clean_paper_badge_bg">#FFF0EAE1</color>
 

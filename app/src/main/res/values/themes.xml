@@ -123,6 +123,12 @@
     <!-- Default Theme is Dark Stage -->
     <style name="Theme.COGChords" parent="Theme.COGChords.DarkStage" />
 
+    <!-- Rounded Square (soft corners) Shape Appearance for Logo and Emblems -->
+    <style name="ShapeAppearance.COGChords.RoundedSquare" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">25%</item>
+    </style>
+
     <!-- Circular Shape Appearance for Logo and Emblems -->
     <style name="ShapeAppearance.COGChords.Circle" parent="">
         <item name="cornerSize">50%</item>
