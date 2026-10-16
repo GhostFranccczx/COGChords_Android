@@ -83,7 +83,7 @@ public class LineupAdapter extends RecyclerView.Adapter<LineupAdapter.LineupView
                     btnOptions.setColorFilter(rainbowColor);
                 }
             } else {
-                tvName.setTextColor(androidx.core.content.ContextCompat.getColor(itemView.getContext(), R.color.text_primary));
+                tvName.setTextColor(com.example.cogchords.util.ThemeManager.getOnSurfaceColor(itemView.getContext()));
                 if (ivIcon != null) {
                     ivIcon.clearColorFilter();
                 }

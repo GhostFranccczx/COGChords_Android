@@ -201,6 +201,26 @@
                 android:textColorHint="?attr/colorOnSurfaceVariant"
                 android:textSize="14sp" />
 
+            <!-- Import from PDF / Word -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_import_file"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="16dp"
+                android:letterSpacing="0.04"
+                android:text="IMPORT FROM PDF / WORD"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:cornerRadius="6dp"
+                app:icon="@drawable/ic_import"
+                app:iconGravity="textStart"
+                app:iconPadding="8dp"
+                app:iconSize="18dp"
+                app:iconTint="?attr/colorOnSurface"
+                app:strokeColor="?attr/colorOutline" />
+
             <!-- Chords & Lyrics -->
             <LinearLayout
                 android:layout_width="match_parent"

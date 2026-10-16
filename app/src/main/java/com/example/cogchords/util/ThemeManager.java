@@ -180,6 +180,49 @@ public class ThemeManager {
         }
     }
 
+    // ------------------------------------------------------------------
+    // Theme-aware colors: always resolve from the ACTIVE theme so text is
+    // readable on every theme (instead of fixed Dark Stage colors).
+    // ------------------------------------------------------------------
+    public static int getThemedColor(Context context, int attr, int fallback) {
+        android.util.TypedValue tv = new android.util.TypedValue();
+        if (context.getTheme().resolveAttribute(attr, tv, true)
+                && tv.type >= android.util.TypedValue.TYPE_FIRST_COLOR_INT
+                && tv.type <= android.util.TypedValue.TYPE_LAST_COLOR_INT) {
+            return tv.data;
+        }
+        return fallback;
+    }
+
+    public static int getOnSurfaceColor(Context context) {
+        return getThemedColor(context, com.google.android.material.R.attr.colorOnSurface, getTextColor(context));
+    }
+
+    public static int getOnSurfaceVariantColor(Context context) {
+        return getThemedColor(context, com.google.android.material.R.attr.colorOnSurfaceVariant, getTextColor(context));
+    }
+
+    public static boolean isLightTheme(Context context) {
+        return THEME_CLEAN_PAPER.equals(getTheme(context));
+    }
+
+    /**
+     * Enables edge-to-edge and sets the status/navigation bar ICON colors from the
+     * selected app theme (dark icons on Clean Paper, light icons on dark themes),
+     * instead of following the phone's system dark mode.
+     */
+    public static void enableEdgeToEdge(androidx.activity.ComponentActivity activity) {
+        if (isLightTheme(activity)) {
+            androidx.activity.EdgeToEdge.enable(activity,
+                    androidx.activity.SystemBarStyle.light(android.graphics.Color.TRANSPARENT, android.graphics.Color.TRANSPARENT),
+                    androidx.activity.SystemBarStyle.light(android.graphics.Color.TRANSPARENT, android.graphics.Color.TRANSPARENT));
+        } else {
+            androidx.activity.EdgeToEdge.enable(activity,
+                    androidx.activity.SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+                    androidx.activity.SystemBarStyle.dark(android.graphics.Color.TRANSPARENT));
+        }
+    }
+
     public static boolean isRainbowTheme(Context context) {
         return THEME_RAINBOW.equals(getTheme(context));
     }

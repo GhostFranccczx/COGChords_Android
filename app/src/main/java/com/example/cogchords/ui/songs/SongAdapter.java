@@ -103,11 +103,11 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.SongViewHolder
 
                 btnOptions.setColorFilter(rainbowColor);
             } else {
-                tvTitle.setTextColor(androidx.core.content.ContextCompat.getColor(itemView.getContext(), R.color.text_primary));
+                tvTitle.setTextColor(com.example.cogchords.util.ThemeManager.getOnSurfaceColor(itemView.getContext()));
                 tvKey.setBackgroundResource(R.drawable.bg_key_badge);
-                tvKey.setTextColor(androidx.core.content.ContextCompat.getColor(itemView.getContext(), R.color.text_primary));
+                tvKey.setTextColor(com.example.cogchords.util.ThemeManager.getOnSurfaceColor(itemView.getContext()));
                 tvCategory.setBackgroundResource(R.drawable.bg_key_badge);
-                tvCategory.setTextColor(androidx.core.content.ContextCompat.getColor(itemView.getContext(), R.color.text_secondary));
+                tvCategory.setTextColor(com.example.cogchords.util.ThemeManager.getOnSurfaceVariantColor(itemView.getContext()));
                 btnOptions.clearColorFilter();
             }
 

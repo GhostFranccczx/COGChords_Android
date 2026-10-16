@@ -28,7 +28,7 @@
             android:foreground="?android:attr/selectableItemBackgroundBorderless"
             android:scaleType="centerCrop"
             android:src="@drawable/app_logo"
-            app:shapeAppearanceOverlay="@style/ShapeAppearance.COGChords.Circle"
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.COGChords.RoundedSquare"
             app:strokeColor="?attr/colorOutline"
             app:strokeWidth="1.5dp" />
 
@@ -101,6 +101,39 @@
             android:textColorHint="?attr/colorOnSurfaceVariant"
             android:textSize="14sp" />
     </LinearLayout>
+
+    <!-- Instrument Toggle -->
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/toggle_instrument"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_mode_guitar"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="GUITAR"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_mode_piano"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:text="PIANO"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+    </com.google.android.material.button.MaterialButtonToggleGroup>
 
     <!-- Root Note Filter Chips (Horizontal Scroll) -->
     <HorizontalScrollView

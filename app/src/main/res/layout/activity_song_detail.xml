@@ -59,6 +59,36 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/btn_toggle_controls"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Show controls"
+            android:padding="8dp"
+            android:src="@drawable/ic_tune"
+            app:tint="?attr/colorOnSurface" />
+
+        <ImageView
+            android:id="@+id/btn_doodle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Doodle on song"
+            android:padding="8dp"
+            android:src="@drawable/ic_draw"
+            app:tint="?attr/colorOnSurface" />
+
+        <ImageView
+            android:id="@+id/btn_export_pdf"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Export as PDF"
+            android:padding="8dp"
+            android:src="@drawable/ic_export"
+            app:tint="?attr/colorOnSurface" />
+
+        <ImageView
             android:id="@+id/btn_edit_song"
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -82,6 +112,7 @@
     <!-- Transpose Controls Bar -->
     <LinearLayout
         android:id="@+id/layout_transpose_controls"
+        android:visibility="gone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@drawable/bg_transpose_bar"
@@ -259,10 +290,89 @@
 
         </LinearLayout>
 
+        <!-- Third Row: Auto Scroll Controls -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Auto Scroll"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="11sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_scroll_slower"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="36dp"
+                android:layout_height="28dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                android:text="-"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="13sp"
+                app:cornerRadius="4dp"
+                app:strokeColor="?attr/colorOutline" />
+
+            <TextView
+                android:id="@+id/tv_scroll_speed"
+                android:layout_width="28dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="monospace"
+                android:gravity="center"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="3" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_scroll_faster"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="36dp"
+                android:layout_height="28dp"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                android:text="+"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="13sp"
+                app:cornerRadius="4dp"
+                app:strokeColor="?attr/colorOutline" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_scroll_toggle"
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="28dp"
+                android:layout_marginStart="8dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minWidth="88dp"
+                android:paddingHorizontal="10dp"
+                android:text="▶ PLAY"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                app:cornerRadius="4dp"
+                app:strokeColor="?attr/colorOutline" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
     <View
         android:id="@+id/transpose_divider"
+        android:visibility="gone"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="?attr/colorOutline"
@@ -278,10 +388,14 @@
         android:clipToPadding="false"
         android:fillViewport="true"
         android:paddingBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@id/layout_lineup_nav"
+        app:layout_constraintBottom_toTopOf="@id/layout_doodle_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/transpose_divider">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -302,7 +416,177 @@
                 tools:text="[Verse 1]\nG             C\nAmazing grace how sweet" />
 
         </LinearLayout>
+
+            <!-- Doodle layer: transparent, sits on top of the text and scrolls with it -->
+            <com.example.cogchords.ui.songs.DrawingView
+                android:id="@+id/drawing_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </FrameLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <!-- Doodle Toolbar (visible only while doodling) -->
+    <LinearLayout
+        android:id="@+id/layout_doodle_toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_transpose_bar"
+        android:orientation="vertical"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="8dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@id/layout_lineup_nav"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButtonToggleGroup
+                android:id="@+id/toggle_doodle_tool"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:selectionRequired="true"
+                app:singleSelection="true">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_tool_pen"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingHorizontal="4dp"
+                    android:text="PEN"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_tool_marker"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingHorizontal="4dp"
+                    android:text="MARKER"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_tool_eraser"
+                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:paddingHorizontal="4dp"
+                    android:text="ERASER"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+            </com.google.android.material.button.MaterialButtonToggleGroup>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_doodle_done"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minWidth="0dp"
+                android:paddingHorizontal="12dp"
+                android:text="DONE"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/dot_color_0"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_margin="4dp" />
+
+            <View
+                android:id="@+id/dot_color_1"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_margin="4dp" />
+
+            <View
+                android:id="@+id/dot_color_2"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_margin="4dp" />
+
+            <View
+                android:id="@+id/dot_color_3"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_margin="4dp" />
+
+            <View
+                android:id="@+id/dot_color_4"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_margin="4dp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_doodle_undo"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minWidth="0dp"
+                android:paddingHorizontal="10dp"
+                android:text="UNDO"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_doodle_clear"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minWidth="0dp"
+                android:paddingHorizontal="10dp"
+                android:text="CLEAR"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </LinearLayout>
 
     <!-- Bottom Lineup Navigation Bar (Visible only when opened from a Lineup) -->
     <LinearLayout

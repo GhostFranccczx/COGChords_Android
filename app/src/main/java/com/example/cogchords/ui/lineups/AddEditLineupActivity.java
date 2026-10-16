@@ -62,7 +62,7 @@ public class AddEditLineupActivity extends AppCompatActivity implements LineupSo
     protected void onCreate(Bundle savedInstanceState) {
         com.example.cogchords.util.ThemeManager.applyTheme(this);
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        com.example.cogchords.util.ThemeManager.enableEdgeToEdge(this);
         setContentView(R.layout.activity_add_edit_lineup);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
