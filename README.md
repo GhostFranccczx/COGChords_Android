@@ -392,17 +392,6 @@ Import is a best-effort rebuild. Open the song in the editor, fix spacing and ch
 
 </details>
 
-<br/>
-
-## Contributing
-
-1. `git checkout -b my-feature`
-2. `git commit -am "Describe your change"`
-3. `git push origin my-feature`
-4. Open a Pull Request.
-
-<br/>
-
 <div align="center">
 
 Made with ♥ for worship teams everywhere.<br/>
