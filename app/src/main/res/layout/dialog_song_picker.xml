@@ -1,14 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="400dp"
-    android:fadeScrollbars="false">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
+    <!-- Search box -->
     <LinearLayout
-        android:id="@+id/song_list_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingVertical="4dp" />
+        android:layout_height="44dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/bg_search_box"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="12dp"
+        android:paddingEnd="6dp">
 
-</ScrollView>
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="Search Icon"
+            android:src="@drawable/ic_search"
+            app:tint="?attr/colorOnSurfaceVariant" />
+
+        <EditText
+            android:id="@+id/et_picker_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:hint="Search by title or artist..."
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurfaceVariant"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/btn_picker_clear"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Clear search"
+            android:padding="6dp"
+            android:src="@drawable/ic_close"
+            android:visibility="gone"
+            app:tint="?attr/colorOnSurfaceVariant" />
+    </LinearLayout>
+
+    <!-- Song list (fixed height so the dialog does not jump while filtering) -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <ScrollView
+            android:id="@+id/picker_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fadeScrollbars="false">
+
+            <LinearLayout
+                android:id="@+id/song_list_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingVertical="4dp" />
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/tv_picker_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingHorizontal="24dp"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="14sp"
+            android:visibility="gone" />
+    </FrameLayout>
+
+</LinearLayout>
