@@ -2,16 +2,23 @@ package com.example.cogchords.ui.lineups;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -32,6 +39,10 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.List;
 import java.util.Locale;
 
@@ -169,42 +180,132 @@ public class AddEditLineupActivity extends AppCompatActivity implements LineupSo
             songViewModel.getSongs().removeObservers(this);
 
             View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_song_picker, null);
+            EditText etSearch = dialogView.findViewById(R.id.et_picker_search);
+            ImageView btnClear = dialogView.findViewById(R.id.btn_picker_clear);
+            ScrollView scroll = dialogView.findViewById(R.id.picker_scroll);
             LinearLayout songListContainer = dialogView.findViewById(R.id.song_list_container);
-            List<Song> selectedSongs = new ArrayList<>();
+            TextView tvEmpty = dialogView.findViewById(R.id.tv_picker_empty);
 
-            for (Song song : songs) {
-                View itemView = LayoutInflater.from(this).inflate(R.layout.item_song_picker, songListContainer, false);
-                TextView tvTitle = itemView.findViewById(R.id.tv_picker_title);
-                TextView tvArtistKey = itemView.findViewById(R.id.tv_picker_artist_key);
-                CheckBox cbSelect = itemView.findViewById(R.id.cb_song_select);
-
-                tvTitle.setText(song.getTitle());
-                String subtitle = "";
-                if (song.getArtist() != null && !song.getArtist().isEmpty()) {
-                    subtitle = song.getArtist();
-                }
-                if (song.getOriginalKey() != null && !song.getOriginalKey().isEmpty()) {
-                    subtitle += (subtitle.isEmpty() ? "" : " • ") + "Key: " + song.getOriginalKey();
-                }
-                tvArtistKey.setText(subtitle);
-
-                itemView.setOnClickListener(iv -> {
-                    cbSelect.setChecked(!cbSelect.isChecked());
-                    if (cbSelect.isChecked()) {
-                        selectedSongs.add(song);
-                    } else {
-                        selectedSongs.remove(song);
-                    }
-                });
-
-                songListContainer.addView(itemView);
+            // Songs already in this lineup: shown greyed out and cannot be picked again
+            Set<Long> alreadyAdded = new HashSet<>();
+            for (LineupSongDetail added : editAdapter.getSongs()) {
+                alreadyAdded.add(added.getSongId());
             }
 
-            new MaterialAlertDialogBuilder(this)
+            // Ticked songs are tracked by id, so ticks survive while the list is filtered.
+            // Insertion order = the order the songs were ticked.
+            Map<Long, Song> selectedSongs = new LinkedHashMap<>();
+
+            AlertDialog[] dialogRef = new AlertDialog[1];
+
+            Runnable updateAddButton = () -> {
+                if (dialogRef[0] == null) return;
+                Button add = dialogRef[0].getButton(AlertDialog.BUTTON_POSITIVE);
+                if (add != null) {
+                    add.setText(selectedSongs.isEmpty()
+                            ? "Add Selected"
+                            : "Add Selected (" + selectedSongs.size() + ")");
+                }
+            };
+
+            Runnable renderList = () -> {
+                String rawQuery = etSearch.getText().toString().trim();
+                String query = rawQuery.toLowerCase(Locale.getDefault());
+
+                songListContainer.removeAllViews();
+                int shown = 0;
+
+                for (Song song : songs) {
+                    String title = song.getTitle() != null ? song.getTitle() : "";
+                    String artist = song.getArtist() != null ? song.getArtist() : "";
+
+                    // Search matches title or artist (same as the Songs tab)
+                    if (!query.isEmpty()
+                            && !title.toLowerCase(Locale.getDefault()).contains(query)
+                            && !artist.toLowerCase(Locale.getDefault()).contains(query)) {
+                        continue;
+                    }
+                    shown++;
+
+                    View itemView = LayoutInflater.from(this).inflate(R.layout.item_song_picker, songListContainer, false);
+                    TextView tvTitle = itemView.findViewById(R.id.tv_picker_title);
+                    TextView tvArtistKey = itemView.findViewById(R.id.tv_picker_artist_key);
+                    CheckBox cbSelect = itemView.findViewById(R.id.cb_song_select);
+
+                    tvTitle.setText(song.getTitle());
+                    String subtitle = "";
+                    if (!artist.isEmpty()) {
+                        subtitle = artist;
+                    }
+                    if (song.getOriginalKey() != null && !song.getOriginalKey().isEmpty()) {
+                        subtitle += (subtitle.isEmpty() ? "" : " • ") + "Key: " + song.getOriginalKey();
+                    }
+
+                    if (alreadyAdded.contains(song.getId())) {
+                        // Already in the lineup: greyed out, ticked, not clickable
+                        tvArtistKey.setText(subtitle.isEmpty() ? "Already added" : "Already added • " + subtitle);
+                        cbSelect.setChecked(true);
+                        cbSelect.setEnabled(false);
+                        itemView.setClickable(false);
+                        itemView.setFocusable(false);
+                        itemView.setAlpha(0.45f);
+                    } else {
+                        tvArtistKey.setText(subtitle);
+                        cbSelect.setChecked(selectedSongs.containsKey(song.getId()));
+                        itemView.setOnClickListener(iv -> {
+                            if (selectedSongs.containsKey(song.getId())) {
+                                selectedSongs.remove(song.getId());
+                                cbSelect.setChecked(false);
+                            } else {
+                                selectedSongs.put(song.getId(), song);
+                                cbSelect.setChecked(true);
+                            }
+                            updateAddButton.run();
+                        });
+                    }
+
+                    songListContainer.addView(itemView);
+                }
+
+                if (shown == 0) {
+                    tvEmpty.setText(rawQuery.isEmpty() ? "No songs" : "No songs match \"" + rawQuery + "\"");
+                    tvEmpty.setVisibility(View.VISIBLE);
+                } else {
+                    tvEmpty.setVisibility(View.GONE);
+                }
+                scroll.scrollTo(0, 0);
+            };
+
+            etSearch.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    btnClear.setVisibility(s.length() > 0 ? View.VISIBLE : View.GONE);
+                    renderList.run();
+                }
+            });
+            btnClear.setOnClickListener(v -> etSearch.setText(""));
+            etSearch.setOnEditorActionListener((v, actionId, event) -> {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                    if (imm != null) imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                    return true;
+                }
+                return false;
+            });
+
+            renderList.run();
+
+            dialogRef[0] = new MaterialAlertDialogBuilder(this)
                     .setTitle("Select Songs")
                     .setView(dialogView)
                     .setPositiveButton("Add Selected", (dialog, which) -> {
-                        for (Song song : selectedSongs) {
+                        for (Song song : selectedSongs.values()) {
                             LineupSongDetail detail = new LineupSongDetail();
                             detail.setSongId(song.getId());
                             detail.setTitle(song.getTitle());
@@ -218,7 +319,14 @@ public class AddEditLineupActivity extends AppCompatActivity implements LineupSo
                         updateEmptyState();
                     })
                     .setNegativeButton("Cancel", null)
-                    .show();
+                    .create();
+
+            if (dialogRef[0].getWindow() != null) {
+                dialogRef[0].getWindow().setSoftInputMode(
+                        android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            }
+            dialogRef[0].show();
+            updateAddButton.run();
         });
     }
 
